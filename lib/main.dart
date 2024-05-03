@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mlosafi/home_page.dart';
+import 'package:mlosafi/common/presentation/home_page.dart';
 
 void main() {
   runApp(const MyApp());

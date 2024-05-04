@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mlosafi/common/utils/intro_slides_component.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,9 +50,7 @@ class _HomePageState extends State<HomePage> {
 
   void _navigateToNextPage(int currentPage) {
     if (currentPage == _pages.length - 1) {
-      // Navigate to login or signup route
-      // Replace this with your actual navigation logic
-      print('Navigate to login or signup route');
+      return context.go('/login');
     } else {
       _controller.nextPage(
         duration: const Duration(milliseconds: 300),

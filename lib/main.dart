@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mlosafi/common/presentation/home_page.dart';
+import 'package:mlosafi/common/router/app_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: FlexThemeData.light(
         colors: const FlexSchemeColor(
@@ -131,7 +131,7 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       themeMode: ThemeMode.system,
-      home: const HomePage(),
+      routerConfig: AppRouter.router,
     );
   }
 }

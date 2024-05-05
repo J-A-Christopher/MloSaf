@@ -89,7 +89,9 @@ class LoginScreen extends StatelessWidget {
               width: sizedObject.width * 0.7,
               height: sizedObject.height * 0.05,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.go('/first-route');
+                },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

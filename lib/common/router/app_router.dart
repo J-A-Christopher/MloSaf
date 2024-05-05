@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:mlosafi/common/presentation/first_route.dart';
 import 'package:mlosafi/common/presentation/forgot_password.dart';
 import 'package:mlosafi/common/presentation/home_page.dart';
 import 'package:mlosafi/common/presentation/login_screen.dart';
@@ -6,7 +7,7 @@ import 'package:mlosafi/common/presentation/signup.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(routes: [
-     GoRoute(
+    GoRoute(
       path: '/',
       builder: (context, state) => const HomePage(),
     ),
@@ -14,13 +15,15 @@ class AppRouter {
       path: '/login',
       builder: (context, state) => const LoginScreen(),
     ),
-     GoRoute(
+    GoRoute(
       path: '/forgot-password',
       builder: (context, state) => const ForgotPassword(),
     ),
-     GoRoute(
+    GoRoute(
       path: '/signUp',
       builder: (context, state) => const SignUpScreen(),
-    )
+    ),
+    GoRoute(
+        path: '/first-route', builder: (context, state) => const FirstRoute())
   ]);
 }

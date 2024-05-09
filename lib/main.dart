@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mlosafi/common/router/app_router.dart';
+import 'package:mlosafi/common/router/stateful_shell.dart';
 
 void main() {
   runApp(const MyApp());
@@ -131,7 +132,9 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       themeMode: ThemeMode.system,
-      routerConfig: AppRouter.router,
+      //routerConfig: AppRouter.router,
+       routerConfig: goRouter,
+  
     );
   }
 }

@@ -93,7 +93,7 @@ class _FirstRouteState extends State<FirstRoute> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  context.push('/food-detail');
+                                  context.push('/first-route/food-detail');
                                 },
                                 child: Card(
                                   child: Padding(

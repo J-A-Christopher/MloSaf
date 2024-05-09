@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mlosafi/common/reusables/title_text.dart';
 
 class CartData extends StatelessWidget {
@@ -19,22 +18,10 @@ class CartData extends StatelessWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.delete,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.error,
               ))
         ],
         centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: CircleAvatar(
-            child: Center(
-              child: IconButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  icon: const Icon(Icons.arrow_back_ios)),
-            ),
-          ),
-        ),
       ),
       body: Stack(
         children: [

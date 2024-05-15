@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mlosafi/common/router/stateful_shell.dart';
 import 'package:mlosafi/common/utils/bloc_observer.dart';
+import 'package:mlosafi/di/di.dart';
 import 'package:mlosafi/features/login/presentation/bloc/login_bloc.dart';
 
 void main() {
+  configureDependencies();
   Bloc.observer = AppGlobalBlocObserver();
   runApp(const MyApp());
 }
@@ -18,7 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => LoginBloc(),)
+        BlocProvider(
+          create: (_) => getIt<LoginBloc>(),
+        )
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

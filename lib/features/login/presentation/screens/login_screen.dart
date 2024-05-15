@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: sizedObject.height * 0.08,
+              height: sizedObject.height * 0.02,
             ),
             BlocListener<LoginBloc, LoginState>(
               listener: (context, state) {
@@ -139,7 +139,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   context.go('/first-route');
                 } else if (state is LoginInError) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.errorMessage)));
+                    SnackBar(
+                      content: Text(
+                        state.errorMessage,
+                      ),
+                      backgroundColor: Theme.of(context).colorScheme.error,
+                    ),
+                  );
                 }
               },
               child:

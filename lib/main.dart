@@ -8,6 +8,7 @@ import 'package:mlosafi/di/di.dart';
 import 'package:mlosafi/features/login/presentation/bloc/login_bloc.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   Bloc.observer = AppGlobalBlocObserver();
   runApp(const MyApp());

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mlosafi/common/reusables/list_tile_reus.dart';
 import 'package:mlosafi/common/reusables/title_text.dart';
+import 'package:mlosafi/common/utils/storage_utils.dart';
+import 'package:mlosafi/di/di.dart';
 
 class MyProfile extends StatelessWidget {
   const MyProfile({super.key});
@@ -136,7 +138,31 @@ class MyProfile extends StatelessWidget {
                         leadingIcon: const Icon(Icons.logout),
                         title: 'Log Out',
                         trailingIconButton: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Logout'),
+                                    content: const Text('Are you sure?'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            getIt<StorageUtils>().logoutUser();
+                                            context.pop();
+                                            context.go('/login');
+                                          },
+                                          child: const Text('Yes')),
+                                      TextButton(
+                                          onPressed: () {
+                                            context.pop();
+                                          },
+                                          child: const Text('No'))
+                                    ],
+                                  );
+                                },
+                              );
+                            },
                             icon: const Icon(Icons.arrow_forward_ios))),
                   ],
                 ),

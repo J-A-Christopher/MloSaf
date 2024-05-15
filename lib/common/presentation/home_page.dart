@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mlosafi/common/utils/intro_slides_component.dart';
+import 'package:mlosafi/common/utils/storage_utils.dart';
+import 'package:mlosafi/di/di.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,9 +51,23 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _navigateToNextPage(int currentPage) {
+  void _navigateToNextPage(int currentPage) async {
     if (currentPage == _pages.length - 1) {
-      return context.go('/login');
+      final activeUserToken =
+          await getIt<StorageUtils>().getUserInfo(key: 'token');
+      if (activeUserToken != null) {
+        bool hasExpired = JwtDecoder.isExpired(activeUserToken);
+
+        if (context.mounted) {
+          if (hasExpired) {
+            return context.go('/login');
+          } else {
+            return context.go('/first-route');
+          }
+        }
+      } else {
+        context.go('/login');
+      }
     } else {
       _controller.nextPage(
         duration: const Duration(milliseconds: 300),

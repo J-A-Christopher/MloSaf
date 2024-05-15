@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mlosafi/common/reusables/elevated_button.dart';
 import 'package:mlosafi/common/reusables/title_text.dart';
+import 'package:mlosafi/common/utils/storage_utils.dart';
+import 'package:mlosafi/di/di.dart';
 import 'package:mlosafi/features/login/Data/model/login_body.dart';
 import 'package:mlosafi/features/login/presentation/bloc/login_bloc.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,13 +21,11 @@ class _LoginScreenState extends State<LoginScreen> {
   String? password = '';
   final _formKey = GlobalKey<FormState>();
   void submitLoginData() {
-    _formKey.currentState!.save();
-    // print(email);
-    // print(password);
-    final logInData = LoginBody(email: email!, password: password!).toJson();
-    // print(logInDet);
-    // LoginDataSourceImpl().
-    context.read<LoginBloc>().add(LoginUser(loginData: logInData));
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      final logInData = LoginBody(email: email!, password: password!).toJson();
+      context.read<LoginBloc>().add(LoginUser(loginData: logInData));
+    }
   }
 
   @override
@@ -70,6 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         onSaved: (String? value) {
                           email = value;
                         },
+                        validator: (String? value) {
+                          if (value!.isEmpty || !value.contains('@')) {
+                            return 'Invalid input ';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
                             filled: true,
@@ -88,6 +94,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextFormField(
                         onSaved: (String? value) {
                           password = value;
+                        },
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
+                            return 'Input cannot be empty';
+                          }
+                          return null;
                         },
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
@@ -134,6 +146,15 @@ class _LoginScreenState extends State<LoginScreen> {
             BlocListener<LoginBloc, LoginState>(
               listener: (context, state) {
                 if (state is LoginInLoaded) {
+                  final accessToken = state.token.toString();
+                  getIt<StorageUtils>()
+                      .writeUserInfo(key: 'token', userInfo: accessToken);
+                  Map<String, dynamic> decodedToken =
+                      JwtDecoder.decode(accessToken);
+                  final userName = decodedToken['username'];
+                  getIt<StorageUtils>()
+                      .writeUserInfo(key: 'username', userInfo: userName);
+
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Login Successful')));
                   context.go('/first-route');

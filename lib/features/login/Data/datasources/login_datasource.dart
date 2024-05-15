@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mlosafi/common/utils/exceptions.dart';
 import 'package:mlosafi/features/login/Data/model/login_response.dart';
 
@@ -6,6 +7,7 @@ abstract class LoginDataSource {
   Future<LoginResponse> loginUser(Map<String, dynamic> loginData);
 }
 
+@Injectable(as: LoginDataSource)
 class LoginDataSourceImpl implements LoginDataSource {
   @override
   Future<LoginResponse> loginUser(Map<String, dynamic> loginData) async {

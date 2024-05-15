@@ -4,7 +4,7 @@ import 'package:mlosafi/common/presentation/first_route.dart';
 import 'package:mlosafi/common/presentation/food_detail.dart';
 import 'package:mlosafi/common/presentation/forgot_password.dart';
 import 'package:mlosafi/common/presentation/home_page.dart';
-import 'package:mlosafi/common/presentation/login_screen.dart';
+import 'package:mlosafi/features/login/presentation/screens/login_screen.dart';
 import 'package:mlosafi/common/presentation/signup.dart';
 
 class AppRouter {

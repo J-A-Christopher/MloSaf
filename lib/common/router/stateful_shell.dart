@@ -8,7 +8,7 @@ import 'package:mlosafi/common/presentation/home_page.dart';
 import 'package:mlosafi/features/login/presentation/screens/login_screen.dart';
 import 'package:mlosafi/common/presentation/orders.dart';
 import 'package:mlosafi/common/presentation/profile.dart';
-import 'package:mlosafi/common/presentation/signup.dart';
+import 'package:mlosafi/features/signup/presentation/screens/signup.dart';
 import 'package:mlosafi/common/router/nested_nav.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();

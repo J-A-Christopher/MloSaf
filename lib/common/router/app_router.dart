@@ -5,7 +5,7 @@ import 'package:mlosafi/common/presentation/food_detail.dart';
 import 'package:mlosafi/common/presentation/forgot_password.dart';
 import 'package:mlosafi/common/presentation/home_page.dart';
 import 'package:mlosafi/features/login/presentation/screens/login_screen.dart';
-import 'package:mlosafi/common/presentation/signup.dart';
+import 'package:mlosafi/features/signup/presentation/screens/signup.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(routes: [

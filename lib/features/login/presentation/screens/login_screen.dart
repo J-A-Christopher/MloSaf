@@ -19,12 +19,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String? email = '';
   String? password = '';
+  bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
   void submitLoginData() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       final logInData = LoginBody(email: email!, password: password!).toJson();
       context.read<LoginBloc>().add(LoginUser(loginData: logInData));
+      _formKey.currentState!.reset();
     }
   }
 
@@ -101,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                           return null;
                         },
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
                             contentPadding: const EdgeInsets.all(5),
                             filled: true,
@@ -111,7 +114,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             hintStyle: Theme.of(context)
                                 .textTheme
                                 .bodySmall
-                                ?.copyWith(fontSize: 15))),
+                                ?.copyWith(fontSize: 15),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _obscureText = !_obscureText;
+                                  });
+                                },
+                                icon: !_obscureText
+                                    ? const Icon(Icons.visibility)
+                                    : const Icon(Icons.visibility_off)))),
                     SizedBox(
                       height: sizedObject.height * 0.01,
                     ),

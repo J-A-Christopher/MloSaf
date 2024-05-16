@@ -6,6 +6,7 @@ import 'package:mlosafi/common/router/stateful_shell.dart';
 import 'package:mlosafi/common/utils/bloc_observer.dart';
 import 'package:mlosafi/di/di.dart';
 import 'package:mlosafi/features/login/presentation/bloc/login_bloc.dart';
+import 'package:mlosafi/features/signup/presentation/bloc/sign_up_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => getIt<LoginBloc>(),
-        )
+        ),
+        BlocProvider(create: (_) => getIt<SignUpBloc>())
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

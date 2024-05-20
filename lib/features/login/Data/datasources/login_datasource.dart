@@ -27,6 +27,7 @@ class LoginDataSourceImpl implements LoginDataSource {
       } else {
         //When device is offline
         String? errorMessage = e.message;
+
         int colonIndex = errorMessage!.indexOf(':');
         String extractedPart =
             "${errorMessage.substring(0, colonIndex).trim()} are you online?";

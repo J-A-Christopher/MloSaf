@@ -158,11 +158,11 @@ class _LoginScreenState extends State<LoginScreen> {
             BlocListener<LoginBloc, LoginState>(
               listener: (context, state) {
                 if (state is LoginInLoaded) {
-                  final accessToken = state.token.toString();
+                  final accessToken = state.token;
                   getIt<StorageUtils>()
                       .writeUserInfo(key: 'token', userInfo: accessToken);
                   Map<String, dynamic> decodedToken =
-                      JwtDecoder.decode(accessToken);
+                      JwtDecoder.decode(accessToken ?? '');
                   final userName = decodedToken['username'];
                   getIt<StorageUtils>()
                       .writeUserInfo(key: 'username', userInfo: userName);

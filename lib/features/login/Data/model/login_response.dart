@@ -11,4 +11,6 @@ class LoginResponse extends LoginEntity with EquatableMixin {
   factory LoginResponse.fromJson(Map<String, dynamic> data) {
     return LoginResponse(token: data['token']);
   }
+
+ 
 }

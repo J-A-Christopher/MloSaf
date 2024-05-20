@@ -13,7 +13,7 @@ class LoginInLoading extends LoginState {}
 
 class LoginInLoaded extends LoginState {
   const LoginInLoaded({required this.token});
-  final LoginEntity token;
+  final String? token;
 }
 
 class LoginInError extends LoginState {

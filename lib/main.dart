@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mlosafi/common/router/stateful_shell.dart';
 import 'package:mlosafi/common/utils/bloc_observer.dart';
 import 'package:mlosafi/di/di.dart';
+import 'package:mlosafi/features/get-all-foods/Presentation/bloc/get_all_foods_bloc.dart';
 import 'package:mlosafi/features/login/presentation/bloc/login_bloc.dart';
 import 'package:mlosafi/features/signup/presentation/bloc/sign_up_bloc.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<LoginBloc>(),
         ),
-        BlocProvider(create: (_) => getIt<SignUpBloc>())
+        BlocProvider(create: (_) => getIt<SignUpBloc>()),
+        BlocProvider(create: (_) => getIt<GetAllFoodsBloc>())
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

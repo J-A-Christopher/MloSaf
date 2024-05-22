@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mlosafi/features/get-all-foods/Data/models/get_all_foods_model.dart';
 
 class GetFoodEntity extends Equatable {
   const GetFoodEntity(
@@ -18,8 +19,8 @@ class GetFoodEntity extends Equatable {
   final int? price;
   final int? starRating;
   final String? description;
-  final String? category;
-  final String? subCategory;
+  final CategoryObject? category;
+  final SubCategoryObject? subCategory;
 
   @override
   List<Object?> get props => [

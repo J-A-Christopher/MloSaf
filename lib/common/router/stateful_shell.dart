@@ -52,7 +52,7 @@ final goRouter =
               routes: [
                 GoRoute(
                     path: 'food-detail',
-                    builder: (context, state) => const FoodDetail())
+                    builder: (context, state) =>  FoodDetail(selectedId: state.extra as String,))
               ])
         ]),
         StatefulShellBranch(navigatorKey: _shellCartPageNavigatorKey, routes: [

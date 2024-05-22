@@ -141,52 +141,65 @@ class _FirstRouteState extends State<FirstRoute> {
                                           state.foodData[index].starRating;
                                       final foodPrice =
                                           state.foodData[index].price;
-                                      return Card(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(20),
-                                          child: Column(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(10),
-                                                        topRight:
-                                                            Radius.circular(10),
-                                                        bottomLeft:
-                                                            Radius.circular(10),
-                                                        bottomRight:
-                                                            Radius.circular(
-                                                                10)),
-                                                child: CachedNetworkImage(
-                                                  imageUrl: '$imageUrl',
-                                                  height: 100,
-                                                  width: 100,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              Text(
-                                                '$foodName',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge
-                                                    ?.copyWith(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Text(
-                                                      'Star rating: $starRating'),
-                                                  const SizedBox(
-                                                    width: 35,
+                                      final selectedId =
+                                          state.foodData[index].foodId;
+                                      return InkWell(
+                                        onTap: () {
+                                          context.push(
+                                              '/first-route/food-detail',
+                                              extra: selectedId);
+                                        },
+                                        child: Card(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(20),
+                                            child: Column(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  10)),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: '$imageUrl',
+                                                    height: 100,
+                                                    width: 100,
+                                                    fit: BoxFit.cover,
                                                   ),
-                                                  Text('ksh: $foodPrice')
-                                                ],
-                                              )
-                                            ],
+                                                ),
+                                                Text(
+                                                  '$foodName',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge
+                                                      ?.copyWith(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Text(
+                                                        'Star rating: $starRating'),
+                                                    const SizedBox(
+                                                      width: 35,
+                                                    ),
+                                                    Text('ksh: $foodPrice')
+                                                  ],
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );
@@ -239,65 +252,77 @@ class _FirstRouteState extends State<FirstRoute> {
                                   final starRating =
                                       state.foodData[index].starRating;
                                   final foodPrice = state.foodData[index].price;
-                                  return Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20),
-                                      child: Column(
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: const BorderRadius
-                                                .only(
-                                                topLeft: Radius.circular(10),
-                                                topRight: Radius.circular(10),
-                                                bottomLeft: Radius.circular(10),
-                                                bottomRight:
-                                                    Radius.circular(10)),
-                                            child: CachedNetworkImage(
-                                              placeholder: (context, url) =>
-                                                  const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              ),
-                                              errorListener: (value) => Center(
-                                                child: Center(
-                                                  child: Icon(
-                                                    Icons.error,
-                                                    size: 25,
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .error,
+                                  final selectedId =
+                                      state.foodData[index].foodId;
+                                  return InkWell(
+                                    onTap: () {
+                                      context.push('/first-route/food-detail',
+                                          extra: selectedId);
+                                    },
+                                    child: Card(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      topLeft:
+                                                          Radius.circular(10),
+                                                      topRight:
+                                                          Radius.circular(10),
+                                                      bottomLeft:
+                                                          Radius.circular(10),
+                                                      bottomRight:
+                                                          Radius.circular(10)),
+                                              child: CachedNetworkImage(
+                                                placeholder: (context, url) =>
+                                                    const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                                errorListener: (value) =>
+                                                    Center(
+                                                  child: Center(
+                                                    child: Icon(
+                                                      Icons.error,
+                                                      size: 25,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .error,
+                                                    ),
                                                   ),
                                                 ),
+                                                imageUrl: '$imageUrl',
+                                                height: 100,
+                                                width: 100,
+                                                fit: BoxFit.cover,
                                               ),
-                                              imageUrl: '$imageUrl',
-                                              height: 100,
-                                              width: 100,
-                                              fit: BoxFit.cover,
                                             ),
-                                          ),
-                                          Text(
-                                            '$foodName',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge
-                                                ?.copyWith(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Expanded(
-                                                  child: Text(
-                                                      'Star rating: $starRating')),
-                                              const SizedBox(
-                                                width: 35,
-                                              ),
-                                              Text('ksh: $foodPrice')
-                                            ],
-                                          )
-                                        ],
+                                            Text(
+                                              '$foodName',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge
+                                                  ?.copyWith(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Expanded(
+                                                    child: Text(
+                                                        'Star rating: $starRating')),
+                                                const SizedBox(
+                                                  width: 35,
+                                                ),
+                                                Text('ksh: $foodPrice')
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );

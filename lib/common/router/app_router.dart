@@ -1,7 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:mlosafi/common/presentation/cart.dart';
 import 'package:mlosafi/features/get-all-foods/Presentation/screens/first_route.dart';
-import 'package:mlosafi/common/presentation/food_detail.dart';
 import 'package:mlosafi/common/presentation/forgot_password.dart';
 import 'package:mlosafi/common/presentation/home_page.dart';
 import 'package:mlosafi/features/login/presentation/screens/login_screen.dart';
@@ -27,8 +26,8 @@ class AppRouter {
     ),
     GoRoute(
         path: '/first-route', builder: (context, state) => const FirstRoute()),
-    GoRoute(
-        path: '/food-detail', builder: (context, state) => const FoodDetail()),
+    // GoRoute(
+    //     path: '/food-detail', builder: (context, state) => const FoodDetail()),
     GoRoute(path: '/cart', builder: (context, state) => const CartData()),
   ]);
 }

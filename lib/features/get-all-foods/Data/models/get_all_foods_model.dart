@@ -27,9 +27,9 @@ class GetAllFoodsModel extends GetFoodEntity with EquatableMixin {
   @override
   final String? description;
   @override
-  final String? category;
+  final CategoryObject? category;
   @override
-  final String? subCategory;
+  final SubCategoryObject? subCategory;
 
   factory GetAllFoodsModel.fromJson(Map<String, dynamic> data) {
     return GetAllFoodsModel(
@@ -40,8 +40,8 @@ class GetAllFoodsModel extends GetFoodEntity with EquatableMixin {
         price: data['price'],
         starRating: data['starRating'],
         description: data['description'],
-        category: data['category'],
-        subCategory: data['subCategory']);
+        category: CategoryObject.fromJson(data['category']),
+        subCategory: SubCategoryObject.fromJson(data['subCategory']));
   }
 
   Map<String, dynamic> toJson() {
@@ -56,5 +56,41 @@ class GetAllFoodsModel extends GetFoodEntity with EquatableMixin {
       'category': category,
       'subCategory': subCategory
     };
+  }
+}
+
+class CategoryObject {
+  CategoryObject(
+      {this.categoryId, this.foodId, this.mongo_id, this.size, this.name});
+  final String? mongo_id;
+  final String? categoryId;
+  final String? foodId;
+  final String? size;
+  final String? name;
+
+  factory CategoryObject.fromJson(Map<String, dynamic> data) {
+    return CategoryObject(
+        name: data['name'],
+        categoryId: data['categoryId'],
+        foodId: data['foodId'],
+        mongo_id: data['_id'],
+        size: data['size']);
+  }
+}
+
+class SubCategoryObject {
+  SubCategoryObject(
+      {this.subCategoryId, this.categoryId, this.mongo_id, this.size});
+  final String? mongo_id;
+  final String? subCategoryId;
+  final String? categoryId;
+  final String? size;
+
+  factory SubCategoryObject.fromJson(Map<String, dynamic> data) {
+    return SubCategoryObject(
+        subCategoryId: data['subCategoryId'],
+        categoryId: data['categoryId'],
+        mongo_id: data['_id'],
+        size: data['size']);
   }
 }

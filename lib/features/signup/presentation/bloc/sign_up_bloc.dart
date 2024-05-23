@@ -17,7 +17,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         final signUpUseCase =
             await getIt<SignUpUseCase>().signUpUseCase(event.signUpData);
 
-       
         signUpUseCase.fold(
             (failure) => emit(SignUpError(errorMessage: failure)),
             (signUpResponse) => emit(SignUpLoaded(userData: signUpResponse)));

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mlosafi/common/reusables/title_text.dart';
+import 'package:mlosafi/features/add-to-cart/Presentation/bloc/add_to_cart_bloc.dart';
 import 'package:mlosafi/features/get-all-foods/Presentation/bloc/get_all_foods_bloc.dart';
+import 'package:mlosafi/features/get-cart-items/Presentation/bloc/cart_data_bloc.dart';
 
 class FoodDetail extends StatelessWidget {
   const FoodDetail({super.key, required this.selectedId});
@@ -112,7 +114,9 @@ class FoodDetail extends StatelessWidget {
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.shopping_bag),
                       onPressed: () {
-                        context.go('/first-route');
+                        context
+                            .read<AddToCartBloc>()
+                            .add(AddItemToCart(foodId: selectedId));
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -122,6 +126,37 @@ class FoodDetail extends StatelessWidget {
                       label: const Text('Add to Cart'),
                     ),
                   ),
+                  SizedBox(
+                    height: sizedObject.height * 0.04,
+                  ),
+                  BlocListener<AddToCartBloc, AddToCartState>(
+                    listener: (context, state) {
+                      if (state is AddToCartLoaded) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('${state.cartMessage}')));
+                        context.go('/first-route');
+                        context.read<CartDataBloc>().add(GetCartData());
+                      }
+                      if (state is AddToCartError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('${state.errorMessage}'),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.error,
+                          ),
+                        );
+                      }
+                    },
+                    child: BlocBuilder<AddToCartBloc, AddToCartState>(
+                        builder: (context, state) {
+                      if (state is AddToCartLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return const SizedBox();
+                    }),
+                  )
                 ],
               ),
             );

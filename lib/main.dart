@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mlosafi/common/router/stateful_shell.dart';
 import 'package:mlosafi/common/utils/bloc_observer.dart';
 import 'package:mlosafi/di/di.dart';
+import 'package:mlosafi/features/add-to-cart/Presentation/bloc/add_to_cart_bloc.dart';
 import 'package:mlosafi/features/get-all-foods/Presentation/bloc/get_all_foods_bloc.dart';
+import 'package:mlosafi/features/get-cart-items/Presentation/bloc/cart_data_bloc.dart';
 import 'package:mlosafi/features/login/presentation/bloc/login_bloc.dart';
 import 'package:mlosafi/features/signup/presentation/bloc/sign_up_bloc.dart';
 
@@ -27,7 +29,9 @@ class MyApp extends StatelessWidget {
           create: (_) => getIt<LoginBloc>(),
         ),
         BlocProvider(create: (_) => getIt<SignUpBloc>()),
-        BlocProvider(create: (_) => getIt<GetAllFoodsBloc>())
+        BlocProvider(create: (_) => getIt<GetAllFoodsBloc>()),
+        BlocProvider(create: (_) => getIt<AddToCartBloc>()),
+        BlocProvider(create: (_) => CartDataBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

@@ -12,40 +12,50 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:mlosafi/common/utils/storage_utils.dart' as _i5;
 import 'package:mlosafi/features/add-to-cart/Data/datasources/datasource.dart'
-    as _i20;
+    as _i24;
 import 'package:mlosafi/features/add-to-cart/Data/repository/data_add-to-cart.dart'
-    as _i19;
+    as _i23;
 import 'package:mlosafi/features/add-to-cart/Domain/repository/dom_repo_add_cart.dart'
-    as _i18;
+    as _i22;
 import 'package:mlosafi/features/add-to-cart/Domain/usecases/add-to-cart_usecase.dart'
     as _i11;
 import 'package:mlosafi/features/add-to-cart/Presentation/bloc/add_to_cart_bloc.dart'
     as _i10;
 import 'package:mlosafi/features/get-all-foods/Data/datasources/get_all_foodds.dart'
-    as _i14;
+    as _i18;
 import 'package:mlosafi/features/get-all-foods/Data/repository/get_all_food_data.dart'
-    as _i16;
+    as _i20;
 import 'package:mlosafi/features/get-all-foods/Domain/repository/get-all-domain.-repo.dart'
-    as _i15;
+    as _i19;
 import 'package:mlosafi/features/get-all-foods/Domain/usecases/get-food_usecase.dart'
     as _i9;
 import 'package:mlosafi/features/get-all-foods/Presentation/bloc/get_all_foods_bloc.dart'
     as _i8;
+import 'package:mlosafi/features/get-cart-items/Data/datsources/datasrc.dart'
+    as _i28;
+import 'package:mlosafi/features/get-cart-items/Data/repository/cart_ds_repo.dart'
+    as _i15;
+import 'package:mlosafi/features/get-cart-items/Domain/repository/all-cart-repo-domain.dart'
+    as _i14;
+import 'package:mlosafi/features/get-cart-items/Domain/usecases/get_cart_usecase.dart'
+    as _i13;
+import 'package:mlosafi/features/get-cart-items/Presentation/bloc/cart_data_bloc.dart'
+    as _i12;
 import 'package:mlosafi/features/login/Data/datasources/login_datasource.dart'
-    as _i17;
-import 'package:mlosafi/features/login/Data/repository/login_data_repo.dart'
-    as _i22;
-import 'package:mlosafi/features/login/Domain/repository/login_domain_repo.dart'
     as _i21;
+import 'package:mlosafi/features/login/Data/repository/login_data_repo.dart'
+    as _i26;
+import 'package:mlosafi/features/login/Domain/repository/login_domain_repo.dart'
+    as _i25;
 import 'package:mlosafi/features/login/Domain/usecases/login_usecase.dart'
     as _i4;
 import 'package:mlosafi/features/login/presentation/bloc/login_bloc.dart'
     as _i3;
 import 'package:mlosafi/features/signup/data/datasources/signup_datas.dart'
-    as _i23;
-import 'package:mlosafi/features/signup/data/domain/data_domain.dart' as _i13;
+    as _i27;
+import 'package:mlosafi/features/signup/data/domain/data_domain.dart' as _i17;
 import 'package:mlosafi/features/signup/domain/repository/signup_domrepo.dart'
-    as _i12;
+    as _i16;
 import 'package:mlosafi/features/signup/domain/usecases/signup_usecase.dart'
     as _i7;
 import 'package:mlosafi/features/signup/presentation/bloc/sign_up_bloc.dart'
@@ -71,15 +81,19 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i9.GetAllFoodUseCase>(() => _i9.GetAllFoodUseCase());
     gh.factory<_i10.AddToCartBloc>(() => _i10.AddToCartBloc());
     gh.factory<_i11.AddToCartUseCase>(() => _i11.AddToCartUseCase());
-    gh.factory<_i12.SignUpDomainRepo>(() => _i13.SignUpDataRepo());
-    gh.factory<_i14.GetAllFoodData>(() => _i14.GetAllFoodDataImpl());
-    gh.factory<_i15.GetAllFoodDomainRepo>(
-        () => _i16.GetAllFoodDomainRepoImpl());
-    gh.factory<_i17.LoginDataSource>(() => _i17.LoginDataSourceImpl());
-    gh.factory<_i18.DomainAddToCart>(() => _i19.DataAddToCart());
-    gh.factory<_i20.AddToCart>(() => _i20.AddToCartImpl());
-    gh.factory<_i21.LoginDomainRepo>(() => _i22.LoginDataRepo());
-    gh.factory<_i23.SignUpDatasource>(() => _i23.SignUpDataSourceImpl());
+    gh.factory<_i12.CartDataBloc>(() => _i12.CartDataBloc());
+    gh.factory<_i13.CartUseCase>(() => _i13.CartUseCase());
+    gh.factory<_i14.DomainAllCartRepo>(() => _i15.DomainAllCartRepoImpl());
+    gh.factory<_i16.SignUpDomainRepo>(() => _i17.SignUpDataRepo());
+    gh.factory<_i18.GetAllFoodData>(() => _i18.GetAllFoodDataImpl());
+    gh.factory<_i19.GetAllFoodDomainRepo>(
+        () => _i20.GetAllFoodDomainRepoImpl());
+    gh.factory<_i21.LoginDataSource>(() => _i21.LoginDataSourceImpl());
+    gh.factory<_i22.DomainAddToCart>(() => _i23.DataAddToCart());
+    gh.factory<_i24.AddToCart>(() => _i24.AddToCartImpl());
+    gh.factory<_i25.LoginDomainRepo>(() => _i26.LoginDataRepo());
+    gh.factory<_i27.SignUpDatasource>(() => _i27.SignUpDataSourceImpl());
+    gh.factory<_i28.GetCartItems>(() => _i28.GetCartItemsImpl());
     return this;
   }
 }

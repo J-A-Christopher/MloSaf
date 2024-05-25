@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<SignUpBloc>()),
         BlocProvider(create: (_) => getIt<GetAllFoodsBloc>()),
         BlocProvider(create: (_) => getIt<AddToCartBloc>()),
-        BlocProvider(create: (_) => CartDataBloc()),
+        BlocProvider(create: (_) => getIt<CartDataBloc>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

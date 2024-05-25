@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mlosafi/common/utils/constants.dart';
 import 'package:mlosafi/common/utils/exceptions.dart';
 import 'package:mlosafi/common/utils/storage_utils.dart';
@@ -9,6 +10,7 @@ abstract class GetCartItems {
   Future<GetCartData> getCartItems();
 }
 
+@Injectable(as: GetCartItems)
 class GetCartItemsImpl implements GetCartItems {
   @override
   Future<GetCartData> getCartItems() async {

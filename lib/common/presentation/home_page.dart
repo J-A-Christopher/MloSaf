@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage> {
     if (currentPage == _pages.length - 1) {
       final activeUserToken =
           await getIt<StorageUtils>().getUserInfo(key: 'token');
+      await getIt<StorageUtils>().markIntroSlidesAsSeen();
       if (activeUserToken != null) {
         bool hasExpired = JwtDecoder.isExpired(activeUserToken);
 

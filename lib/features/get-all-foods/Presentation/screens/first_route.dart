@@ -42,20 +42,6 @@ class _FirstRouteState extends State<FirstRoute> {
       child: Scaffold(
         body: Stack(
           children: [
-            Positioned(
-                top: 6,
-                right: 16.0,
-                child: InkWell(
-                  onTap: () {
-                    context.push('/cart');
-                  },
-                  child: badges.Badge(
-                    badgeContent: const Text('3'),
-                    badgeStyle: badges.BadgeStyle(
-                        badgeColor: Theme.of(context).colorScheme.primary),
-                    child: const Icon(Icons.shopping_cart),
-                  ),
-                )),
             Padding(
               padding: const EdgeInsets.only(top: 20.0, left: 15, right: 15),
               child: ListView(

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mlosafi/common/utils/storage_utils.dart';
+import 'package:mlosafi/di/di.dart';
 import 'package:mlosafi/features/get-cart-items/Presentation/screens/cart.dart';
 import 'package:mlosafi/features/get-all-foods/Presentation/screens/first_route.dart';
 import 'package:mlosafi/features/add-to-cart/Presentation/screens/food_detail.dart';
@@ -20,6 +22,11 @@ final _shellOrdersPageNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellOrdersPageNavigatorKey');
 final _shellProfilePageNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellProfilePageNavigatorKey');
+
+// Future<String> getInitialLocation() async {
+//   final hasSeenIntroSlides = await getIt<StorageUtils>().hasSeenIntroSlides();
+//   return hasSeenIntroSlides ? '/login' : '/';
+// }
 
 final goRouter =
     GoRouter(initialLocation: '/', navigatorKey: _rootNavigatorKey, routes: [
@@ -52,7 +59,9 @@ final goRouter =
               routes: [
                 GoRoute(
                     path: 'food-detail',
-                    builder: (context, state) =>  FoodDetail(selectedId: state.extra as String,))
+                    builder: (context, state) => FoodDetail(
+                          selectedId: state.extra as String,
+                        ))
               ])
         ]),
         StatefulShellBranch(navigatorKey: _shellCartPageNavigatorKey, routes: [

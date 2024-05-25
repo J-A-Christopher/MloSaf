@@ -38,179 +38,183 @@ class _CartDataState extends State<CartData> {
         ],
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 5.0, left: 15, right: 15),
-            child: ListView(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 5.0, left: 15, right: 15),
+        child: ListView(
+          children: [
+            Stack(
               children: [
-                SizedBox(
-                  height: sizedObject.height * 0.005,
-                ),
-                BlocListener<CartDataBloc, CartDataState>(
-                  listener: (context, state) {
-                    if (state is CartDataError) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('${state.message}'),
-                        backgroundColor: Theme.of(context).colorScheme.error,
-                      ));
-                    }
-                  },
-                  child: BlocBuilder<CartDataBloc, CartDataState>(
-                    builder: (context, state) {
-                      if (state is CartDataLoading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      if (state is CartDataLoaded) {
-                        final itemCount =
-                            state.cartData.cartObject?.cartItems?.length;
-                        final cartData = state.cartData.cartObject?.cartItems;
-                        return Column(
-                          children: List.generate(itemCount ?? 0, (index) {
-                            return Card(
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                      top: 0,
-                                      right: 0,
-                                      child: IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Icons.cancel),
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .error)),
-                                  Row(
+                ListView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  children: [
+                    SizedBox(
+                      height: sizedObject.height * 0.005,
+                    ),
+                    BlocListener<CartDataBloc, CartDataState>(
+                      listener: (context, state) {
+                        if (state is CartDataError) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('${state.message}'),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.error,
+                          ));
+                        }
+                      },
+                      child: BlocBuilder<CartDataBloc, CartDataState>(
+                        builder: (context, state) {
+                          if (state is CartDataLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          if (state is CartDataLoaded) {
+                            final itemCount =
+                                state.cartData.cartObject?.cartItems?.length;
+                            final cartData =
+                                state.cartData.cartObject?.cartItems;
+                            return Column(
+                              children: List.generate(itemCount ?? 0, (index) {
+                                return Card(
+                                  child: Stack(
                                     children: [
-                                      Flexible(
-                                          flex: 2,
-                                          child: CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl:
-                                                '${cartData?[index].imageUrl}',
-                                            height: 100,
-                                            width: 100,
-                                            placeholder: (context, url) =>
-                                                const Center(
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            ),
-                                          )),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Flexible(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: IconButton(
+                                              onPressed: () {},
+                                              icon: const Icon(Icons.cancel),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .error)),
+                                      Row(
                                         children: [
-                                          TitleText(
-                                              titleText:
-                                                  '${cartData?[index].fooodName}'),
-                                          Text(
-                                              'Quantity: ${cartData?[index].quantity}'),
-                                          Text('Ksh: ${cartData?[index].price}')
+                                          Flexible(
+                                              flex: 2,
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl:
+                                                    '${cartData?[index].imageUrl}',
+                                                height: 100,
+                                                width: 100,
+                                                placeholder: (context, url) =>
+                                                    const Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                              )),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Flexible(
+                                              child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              TitleText(
+                                                  titleText:
+                                                      '${cartData?[index].fooodName}'),
+                                              Text(
+                                                  'Quantity: ${cartData?[index].quantity}'),
+                                              Text(
+                                                  'Ksh: ${cartData?[index].price}')
+                                            ],
+                                          ))
                                         ],
-                                      ))
+                                      ),
                                     ],
                                   ),
-                                ],
-                              ),
+                                );
+                              }),
                             );
-                          }),
-                        );
-                      }
-                      return const SizedBox();
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: sizedObject.height * 0.005,
+                          }
+                          return const SizedBox();
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: sizedObject.height * 0.005,
+                    ),
+                  ],
                 ),
               ],
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: SizedBox(
-              width: sizedObject.width,
-              height: sizedObject.height * 0.25,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            const Text('Delivery Address'),
-                            const Spacer(),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'EDIT',
-                                ))
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: sizedObject.height * 0.008,
-                      ),
-                      const Text('Emerald Apartments Room 17'),
-                      SizedBox(
-                        height: sizedObject.height * 0.02,
-                      ),
-                      Row(
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: Row(
                         children: [
-                          const Text('TOTAL:'),
+                          const Text('Delivery Address'),
                           const Spacer(),
-                          BlocBuilder<CartDataBloc, CartDataState>(
-                            builder: (context, state) {
-                              if (state is CartDataLoading) {
-                                return const Expanded(
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                );
-                              }
-                              if (state is CartDataLoaded) {
-                                final total = state.cartData.totalAmount;
-
-                                return TitleText(titleText: 'Ksh: $total');
-                              }
-                              return const SizedBox();
-                            },
-                          )
+                          TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'EDIT',
+                              ))
                         ],
                       ),
-                      SizedBox(
-                        height: sizedObject.height * 0.03,
-                      ),
-                      SizedBox(
-                        width: sizedObject.width,
-                        height: sizedObject.height * 0.05,
-                        child: ElevatedButton.icon(
-                          icon: const Icon(Icons.card_travel),
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                    ),
+                    SizedBox(
+                      height: sizedObject.height * 0.008,
+                    ),
+                    const Text('Emerald Apartments Room 17'),
+                    SizedBox(
+                      height: sizedObject.height * 0.02,
+                    ),
+                    Row(
+                      children: [
+                        const Text('TOTAL:'),
+                        const Spacer(),
+                        BlocBuilder<CartDataBloc, CartDataState>(
+                          builder: (context, state) {
+                            if (state is CartDataLoading) {
+                              return const Expanded(
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            }
+                            if (state is CartDataLoaded) {
+                              final total = state.cartData.totalAmount;
+
+                              return TitleText(titleText: 'Ksh: $total');
+                            }
+                            return const SizedBox();
+                          },
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: sizedObject.height * 0.03,
+                    ),
+                    SizedBox(
+                      width: sizedObject.width,
+                      height: sizedObject.height * 0.05,
+                      child: ElevatedButton.icon(
+                        icon: const Icon(Icons.card_travel),
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.secondary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          label: const Text('PLACE ORDER'),
                         ),
+                        label: const Text('PLACE ORDER'),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

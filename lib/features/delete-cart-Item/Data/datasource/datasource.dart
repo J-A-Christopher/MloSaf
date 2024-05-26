@@ -4,31 +4,29 @@ import 'package:mlosafi/common/utils/constants.dart';
 import 'package:mlosafi/common/utils/exceptions.dart';
 import 'package:mlosafi/common/utils/storage_utils.dart';
 import 'package:mlosafi/di/di.dart';
-import 'package:mlosafi/features/get-cart-items/Data/models/get_cart_item_model.dart';
+import 'package:mlosafi/features/delete-cart-Item/Data/model/delete-cart_model.dart';
 
-abstract class GetCartItems {
-  Future<GetCartData> getCartItems();
+abstract class DeleteCartItem {
+  Future<DeletCartItemModelResponse> deleteCrtItem({required int foodId});
 }
 
-@Injectable(as: GetCartItems)
-class GetCartItemsImpl implements GetCartItems {
+@Injectable(as: DeleteCartItem)
+class DeleteCartItemImpl implements DeleteCartItem {
   @override
-  Future<GetCartData> getCartItems() async {
+  Future<DeletCartItemModelResponse> deleteCrtItem(
+      {required int foodId}) async {
+    print('foodId:$foodId');
     final dio = Dio();
     final token = await getIt<StorageUtils>().getUserInfo(key: 'token');
     try {
-      final result = await dio.get(
-        '$baseUrl/get-cart-details',
+      final result = await dio.delete(
+        '$baseUrl/delete-cart-item/$foodId',
         options: Options(
-          sendTimeout: const Duration(seconds: 10),
-          headers: {'Accept': 'application/json', 'token': token},
-        ),
+            sendTimeout: const Duration(seconds: 10),
+            headers: {'Accept': 'application/json', 'token': token}),
       );
-
-      final cartData = GetCartData.fromJson(result.data);
-      print('data$cartData');
-
-      return cartData;
+      print('result$result');
+      return DeletCartItemModelResponse.fromJson(result.data);
     } on DioException catch (e) {
       if (e.response != null) {
         final requestMessage = e.response!.data['message'];
@@ -36,6 +34,7 @@ class GetCartItemsImpl implements GetCartItems {
       } else {
         //When device is offline
         String? errorMessage = e.message;
+
         int colonIndex = errorMessage!.indexOf(':');
         String extractedPart =
             "${errorMessage.substring(0, colonIndex).trim()} are you online?";

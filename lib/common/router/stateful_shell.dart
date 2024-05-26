@@ -7,6 +7,7 @@ import 'package:mlosafi/features/get-all-foods/Presentation/screens/first_route.
 import 'package:mlosafi/features/add-to-cart/Presentation/screens/food_detail.dart';
 import 'package:mlosafi/common/presentation/forgot_password.dart';
 import 'package:mlosafi/common/presentation/home_page.dart';
+import 'package:mlosafi/features/get-cart-items/Presentation/screens/cart_detail_page.dart';
 import 'package:mlosafi/features/login/presentation/screens/login_screen.dart';
 import 'package:mlosafi/common/presentation/orders.dart';
 import 'package:mlosafi/common/presentation/profile.dart';
@@ -68,7 +69,16 @@ final goRouter =
           GoRoute(
               path: '/cart',
               pageBuilder: (context, state) =>
-                  const NoTransitionPage(child: CartData()))
+                  const NoTransitionPage(child: CartData()),
+              routes: [
+                GoRoute(
+                    path: 'cart-detail',
+                    builder: (context, state) => const CartDetailPage()
+                    //  FoodDetail(
+                    //       selectedId: state.extra as String,
+                    //     )
+                    )
+              ])
         ]),
         StatefulShellBranch(
             navigatorKey: _shellOrdersPageNavigatorKey,

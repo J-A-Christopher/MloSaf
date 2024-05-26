@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:mlosafi/features/get-cart-items/Presentation/bloc/cart_data_bloc.dart';
 
 class ScaffoldWithNestedNavigation extends StatelessWidget {
   const ScaffoldWithNestedNavigation({Key? key, required this.navigationShell})
@@ -24,7 +26,16 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
           const NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(
               icon: badges.Badge(
-                badgeContent: const Text('3'),
+                badgeContent: BlocBuilder<CartDataBloc, CartDataState>(
+                  builder: (context, state) {
+                    if (state is CartDataLoaded) {
+                      final itemInCartCount =
+                          state.cartData.cartObject?.cartItems?.length;
+                      return Text('$itemInCartCount');
+                    }
+                    return const Text('0');
+                  },
+                ),
                 badgeStyle: badges.BadgeStyle(
                     badgeColor: Theme.of(context).colorScheme.primary),
                 child: const Icon(Icons.shopping_bag),
